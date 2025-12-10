@@ -27,11 +27,26 @@ def get_turn_directions() -> list:
 		turn_directions.append(line[0])
 	return turn_directions
 
+turn_directions = get_turn_directions
 
-print(get_turn_directions())
+def get_numbers(): 
+	split_lines = []
+	numbers = []
+	#TURN EACH LINE INTO AN ARRAY OF CHARS 
+	for line in convert_lines_to_strings():
+		new_line = []
+		split_lines.append(line.split())
+		for character in line: 
+			if not character == "\n": 
+				if not character == "L": 
+					if not character == "R": 
+						new_line.append(character)
+		new_line = "".join(new_line)
+		numbers.append(int(new_line))
+	return numbers
 
 
-
+print(get_numbers())
 
 def turn_left(start_number:int, turn_number:int) -> int: 
 	num = start_number
