@@ -32,4 +32,22 @@ def get_x_id_list(ids):
 
 	return x_list 
 
-print(get_x_id_list(id_list))
+def get_y_id_list(ids): 
+	y_list = []
+	holder = ""
+
+	for string in ids: 
+		start_of_string_reached = False
+
+		for character in string:
+			if character == "-": start_of_string_reached = True
+			elif not start_of_string_reached: continue 
+			else:holder = holder + character
+		y_list.append(holder)
+		holder = ""
+	return y_list
+
+x_ids = get_x_id_list(id_list)
+y_ids = get_y_id_list(id_list)
+
+print(y_ids)
