@@ -16,7 +16,7 @@ def convert_lines_to_strings() -> list:
 
 	for line in input_lines: 
 		new_line = "".join(line)
-		new_lines.append(line)
+		if not new_line == "\n": new_lines.append(line)
 	return new_lines
 
 
@@ -24,10 +24,12 @@ def convert_lines_to_strings() -> list:
 def get_turn_directions() -> list: 
 	turn_directions = []
 	for line in convert_lines_to_strings(): 
-		turn_directions.append(line[0])
+		for character in line:
+			if character == "L" or character == "R": 
+				turn_directions.append(character)
 	return turn_directions
 
-turn_directions = get_turn_directions
+turn_directions = get_turn_directions()
 
 def get_numbers(): 
 	split_lines = []
@@ -44,9 +46,7 @@ def get_numbers():
 		new_line = "".join(new_line)
 		numbers.append(int(new_line))
 	return numbers
-
-
-print(get_numbers())
+numbers = get_numbers()
 
 def turn_left(start_number:int, turn_number:int) -> int: 
 	num = start_number
