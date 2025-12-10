@@ -48,6 +48,8 @@ def get_numbers():
 	return numbers
 numbers = get_numbers()
 
+answer = 0 
+
 def turn_left(start_number:int, turn_number:int) -> int: 
 	num = start_number
 	for i in range(turn_number): 
@@ -64,4 +66,13 @@ def turn_right(start_number:int, turn_number:int) -> int:
 
 
 
+num = 50 
+for i in range(len(numbers)): 
+	if turn_directions[i] == "L": 
+		num = turn_left(num, numbers[i])
+		if num == 0: answer = answer + 1
+	elif turn_directions[i] == "R": 
+		num = turn_right(num, numbers[i])
+		if num == 0: answer = answer + 1
 
+print(answer)
