@@ -1,4 +1,4 @@
-input_file = open('day_2_example_input.txt', 'r')
+input_file = open('day_2_input.txt', 'r')
 input_text = input_file.read()
 
 
@@ -56,4 +56,23 @@ for x in possible_ids:
 	length = len(str(x))
 	if (length/2).is_integer(): even_ids.append(x)
 
-print(even_ids)
+
+# determine which ones are fake ids 
+
+fake_ids = []
+
+for x in even_ids:
+	string = str(x)
+	half = int(len(str(x))/2)
+
+	first_half = []
+	second_half = []
+
+	for h in range(half): 
+		first_half.append(string[h])
+		second_half.append(string[h + half])
+
+	if first_half == second_half : fake_ids.append(x)
+
+
+print(sum(fake_ids))
