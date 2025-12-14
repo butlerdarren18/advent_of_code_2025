@@ -1,53 +1,59 @@
-input_file = open('day_2_input.txt', 'r')
-input_text = input_file.readline()
+input_file = open('day_2_example_input.txt', 'r')
+input_text = input_file.read()
 
 
-def separate_at_commas(txt) -> str:
-	id_list = []
-	holder = ""
-	for character in txt:
-		if character == ",":
-			id_list.append(holder)
-			holder = ""
-		else: holder = holder + character
-	return id_list
+# separate the lists at the commas 
+id_pairs = []
+id_temp = []
+for char in input_text: 
+	if not char == "," and not char == "\n":
+		id_temp.append(char)
+	if char == ",":
+		id_pairs.append(id_temp)
+		id_temp = []
+id_pairs.append(id_temp)
 
-id_list = separate_at_commas(input_text)
 
-def get_x_id_list(ids): 
-	x_list = []
-	holder = ""
+# Separate the pairs from eachother 
+x_id_char_lists = []
+y_id_char_lists = []
 
-	for string in ids: 
-		end_of_string_reached = False 
-		
-		for character in string: 
-			if end_of_string_reached == True: continue 
-			if character == "-": 
-				x_list.append(holder)
-				holder = ""
-				end_of_string_reached = True
-			else:
-				holder = holder + character
+for pair in id_pairs:
+	holder = []
 
-	return x_list 
+	for char in pair: 
+		if not char == "-": holder.append(char)
+		else:
+			x_id_char_lists.append(holder)
+			holder = []
+	y_id_char_lists.append(holder)
 
-def get_y_id_list(ids): 
-	y_list = []
-	holder = ""
 
-	for string in ids: 
-		start_of_string_reached = False
+# convert to strings
+x_id_string_list = []
+for xid in x_id_char_lists: x_id_string_list.append("".join(xid))
 
-		for character in string:
-			if character == "-": start_of_string_reached = True
-			elif not start_of_string_reached: continue 
-			else:holder = holder + character
-		y_list.append(holder)
-		holder = ""
-	return y_list
+y_id_string_list = []
+for yid in y_id_char_lists: y_id_string_list.append("".join(yid))
 
-x_ids = get_x_id_list(id_list)
-y_ids = get_y_id_list(id_list)
+#convert to ints 
+x_ints = []
+for xid in x_id_string_list: x_ints.append(int(xid))
 
-print(y_ids)
+y_ints = []
+for yid in y_id_string_list: y_ints.append(int(yid))
+
+# get every possible id
+possible_ids = []
+
+for i in range(len(x_ints)): 
+	for j in range(x_ints[i], y_ints[i] + 1): 
+		possible_ids.append(j)
+
+# get the ids with even quantities of numerals
+even_ids =[] 
+for x in possible_ids: 
+	length = len(str(x))
+	if (length/2).is_integer(): even_ids.append(x)
+
+print(even_ids)
