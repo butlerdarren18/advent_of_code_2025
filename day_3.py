@@ -19,7 +19,7 @@ input_lines = new_lines
 
 # determine two highest nums 
 
-
+total = []
 for line in input_lines:
 	highest_indx = -2
 	second_highest_indx = -1
@@ -31,8 +31,14 @@ for line in input_lines:
 	for i in range(len(line)): 
 		if i > highest_indx: 
 			if line[i] >= line[second_highest_indx]: second_highest_indx = i
+	total.append(line[second_highest_indx])
+	total.append(line[highest_indx])
+
+print(sum(total))
 
 
-	print(line[highest_indx], line[second_highest_indx])
+
+
+
 
 
